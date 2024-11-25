@@ -1,17 +1,18 @@
 import pygame
 from utils import *
 from physicsobject import *
+import random
 
 
 class Ball(PhysicsObject):
-    def __init__(self, x, y_mid, width, height, max_speed, acceleration_spd, color, radius, start_vel_vector, game_manager):
+    def __init__(self, x, y_mid, width, height, max_speed, acceleration_spd, color, radius, start_vel_vector, game_manager, BALL_SPD_INCREMENT):
         super().__init__(x, y_mid, width, height, max_speed, acceleration_spd)
 
         self.color = color
         self.radius = radius
         self.center = (x + width/2, y_mid)
         self.velocity = start_vel_vector
-
+        self.ball_speed_increment = BALL_SPD_INCREMENT
         self.game_manager = game_manager
 
     def draw(self, screen):
@@ -24,18 +25,9 @@ class Ball(PhysicsObject):
                 continue
             else:
                 if self.rect.colliderect(obj):
-                    # Check if the ball is moving towards the paddle (left or right)
-                    if self.velocity[0] == -1 and self.rect.x + self.rect.width > obj.rect.x and self.rect.x < obj.rect.x + obj.rect.width:
-                        # Ball is moving left and collides with the paddle
-                        self.velocity[0] *= -1  # Reverse the velocity
-                        self.rect.x = obj.rect.x + obj.rect.width  # Move the ball just after the paddle
-
-                    elif self.velocity[0] == 1 and self.rect.x < obj.rect.x + obj.rect.width and self.rect.x + self.rect.width > obj.rect.x:
-                        # Ball is moving right and collides with the paddle
-                        self.velocity[0] *= -1  # Reverse the velocity
-                        self.rect.x = obj.rect.x - self.rect.width  # Move the ball just before the paddle
-
-                        
+                    self.velocity[0] *= -1
+                    self.velocity[1] = random.randrange(-100, 100)/100
+                    self.max_speed += self.ball_speed_increment
 
         if self.rect.y > self.game_manager.screen_height or self.rect.y < 0:
             self.velocity[1] *= -1
