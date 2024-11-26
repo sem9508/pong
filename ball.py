@@ -2,6 +2,7 @@ import pygame
 from utils import *
 from physicsobject import *
 import random
+from particleobject import *
 
 
 class Ball(PhysicsObject):
@@ -15,20 +16,10 @@ class Ball(PhysicsObject):
         self.ball_speed_increment = BALL_SPD_INCREMENT
         self.game_manager = game_manager
 
-        self.trail = [(-10, -10)]
-        self.trail_timer = 0
-        self.trail_interval = 1
-        self.trail_length = 10
-        self.max_size = 5
-        self.min_size = 1
+        self.particle = ParticleObject((33, 200, 153), 1, 15, self.radius, 0.1)
 
     def draw(self, screen):
-        for i in range(len(self.trail)):
-            if len(self.trail) > 1:
-                size = self.min_size + (i / (len(self.trail) - 1)) * (self.max_size - self.min_size)
-            else:
-                size = self.max_size  # If there's only one particle, it should be the max size
-            pygame.draw.circle(screen, (48, 40, 80), self.trail[i], size)
+        self.particle.draw(screen)
         pygame.draw.circle(screen, self.color, self.center, self.radius)
 
 
@@ -52,10 +43,4 @@ class Ball(PhysicsObject):
             self.game_manager.point_scored(1)
         self.center = (self.rect.x, self.rect.y)
 
-        if self.trail_timer > self.trail_interval:
-            self.trail_timer = 0
-            self.trail.append(self.center)
-            if len(self.trail) > self.trail_length:
-                self.trail.pop(0)
-        else:
-            self.trail_timer += 1
+        self.particle.update(self.center)
