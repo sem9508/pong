@@ -76,6 +76,8 @@ while run:
     # END OF FRAME
     pygame.display.flip()
     clock.tick(FPS)
+    pygame.display.set_caption("FPS: " + str(int(clock.get_fps())))
+
 
 pygame.quit()
 sys.exit()
