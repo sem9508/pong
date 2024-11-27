@@ -1,8 +1,8 @@
 import pygame
 from utils import *
-from physicsobject import *
+from components.physicsobject import *
 import random
-from particleobject import *
+from components.particleobject import *
 
 
 class Ball(PhysicsObject):

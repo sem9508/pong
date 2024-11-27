@@ -2,19 +2,19 @@ import pygame
 import time
 import random
 import sys
-from paddle import *
-from input_manager import *
+from objects.paddle import *
+from managers.input_manager import *
 from utils import *
-from ball import *
-from game_manager import GameManager
+from objects.ball import *
+from managers.game_manager import GameManager
 from constants import *
-from music_manager import *
+from managers.music_manager import *
 
 # INITIALIZATION
 pygame.init()
 pygame.mixer.init()
 game_manager = GameManager(SCREEN_WIDTH, SCREEN_HEIGHT)
-music_manager = MusicManager('music.ogg', 3000)
+music_manager = MusicManager('assets/sound/music.ogg', 3000)
 
 # VARIABLES
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))

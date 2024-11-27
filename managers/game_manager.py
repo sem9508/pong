@@ -1,5 +1,5 @@
 import random
-from ball import Ball
+from objects.ball import Ball
 
 
 class GameManager:

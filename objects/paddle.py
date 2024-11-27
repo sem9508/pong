@@ -1,7 +1,7 @@
 import pygame
 from utils import *
-from particleobject import *
-from physicsobject import *
+from components.particleobject import *
+from components.physicsobject import *
 
 class Paddle(PhysicsObject):
     def __init__(self, x, y_mid, width, height, max_speed, acceleration_spd, color, input_group, game_manager, particle_color):
