@@ -8,10 +8,13 @@ from utils import *
 from ball import *
 from game_manager import GameManager
 from constants import *
+from music_manager import *
 
 # INITIALIZATION
 pygame.init()
+pygame.mixer.init()
 game_manager = GameManager(SCREEN_WIDTH, SCREEN_HEIGHT)
+music_manager = MusicManager('music.ogg', 3000)
 
 # VARIABLES
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -29,6 +32,8 @@ game_manager.objects.append(ball)
 game_manager.collision_objects.append(player_paddle)
 game_manager.collision_objects.append(enemy_paddle)
 game_manager.collision_objects.append(ball)
+
+music_manager.play(0)
 # GAME LOOP
 while run:
     # INPUT
@@ -49,6 +54,9 @@ while run:
     draw_dotted_line(screen, WHITE, (SCREEN_WIDTH/2-1, 0), (SCREEN_WIDTH/2, SCREEN_HEIGHT), 2, 10)
     for obj in objects:
         obj.draw(screen)
+
+    # MUSIC
+    music_manager.fade_update()
 
     # END OF FRAME
     pygame.display.flip()
