@@ -14,7 +14,7 @@ from managers.music_manager import *
 pygame.init()
 pygame.mixer.init()
 game_manager = GameManager(SCREEN_WIDTH, SCREEN_HEIGHT)
-music_manager = MusicManager('assets/sound/music.ogg', 3000)
+music_manager = MusicManager('assets\sound\music.ogg', 3000)
 
 # VARIABLES
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
