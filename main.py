@@ -13,7 +13,7 @@ from managers.music_manager import *
 # INITIALIZATION
 pygame.init()
 pygame.mixer.init()
-font = pygame.font.Font(None, 74)
+font = pygame.font.SysFont('Stencil', 74)
 
 game_manager = GameManager(SCREEN_WIDTH, SCREEN_HEIGHT)
 music_manager = MusicManager('assets\sound\music.ogg', 3000)
@@ -58,8 +58,8 @@ while run:
     for obj in objects:
         obj.draw(screen)
 
-    text_surface = font.render(str(game_manager.score[1]) + ' : ' + str(game_manager.score[0]), True, (255, 255, 255))
-    screen.blit(text_surface, (200, 250))
+    text_surface = font.render(str(game_manager.score[1]) + '        ' + str(game_manager.score[0]), True, (255, 255, 255))
+    screen.blit(text_surface, (SCREEN_WIDTH/2-text_surface.get_width()/2, 50))
 
     # MUSIC
     music_manager.fade_update()
@@ -71,3 +71,4 @@ while run:
 
 pygame.quit()
 sys.exit()
+
