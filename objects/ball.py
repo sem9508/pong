@@ -3,7 +3,7 @@ from utils import *
 from components.physicsobject import *
 import random
 from components.particleobject import *
-
+from constants import *
 
 class Ball(PhysicsObject):
     def __init__(self, x, y_mid, width, height, max_speed, acceleration_spd, color, radius, start_vel_vector, game_manager, BALL_SPD_INCREMENT):
