@@ -39,8 +39,12 @@ class Ball(PhysicsObject):
             self.velocity[1] *= -1
         if self.rect.x < 0:
             self.game_manager.point_scored(0)
+            self.ball_speed_increment = BALL_SPD_INCREMENT
+            self.max_speed = STD_MAX_BALL_SPD
         elif self.rect.x > self.game_manager.screen_width:
             self.game_manager.point_scored(1)
+            self.ball_speed_increment = BALL_SPD_INCREMENT
+            self.max_speed = STD_MAX_BALL_SPD
         self.center = (self.rect.x, self.rect.y)
 
         self.particle.update(self.center)
