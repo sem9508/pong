@@ -4,6 +4,8 @@ from components.physicsobject import *
 import random
 from components.particleobject import *
 
+from pong.constants import *
+
 
 class Ball(PhysicsObject):
     def __init__(self, x, y_mid, width, height, max_speed, acceleration_spd, color, radius, start_vel_vector, game_manager, BALL_SPD_INCREMENT):
@@ -39,8 +41,13 @@ class Ball(PhysicsObject):
             self.velocity[1] *= -1
         if self.rect.x < 0:
             self.game_manager.point_scored(0)
+            self.ball_speed_increment = BALL_SPD_INCREMENT
+            self.max_speed = STD_MAX_BALL_SPD
         elif self.rect.x > self.game_manager.screen_width:
             self.game_manager.point_scored(1)
+            self.ball_speed_increment = BALL_SPD_INCREMENT
+            self.max_speed = STD_MAX_BALL_SPD
+
         self.center = (self.rect.x, self.rect.y)
 
         self.particle.update(self.center)
