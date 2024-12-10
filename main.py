@@ -13,6 +13,8 @@ from managers.music_manager import *
 # INITIALIZATION
 pygame.init()
 pygame.mixer.init()
+font = pygame.font.Font(None, 74)
+
 game_manager = GameManager(SCREEN_WIDTH, SCREEN_HEIGHT)
 music_manager = MusicManager('assets\sound\music.ogg', 3000)
 
@@ -24,6 +26,7 @@ run = True
 player_paddle = Paddle(PADDLE_OFFSET_X, SCREEN_HEIGHT/2, STD_PADDLE_WIDTH, STD_PADDLE_HEIGHT, STD_MAX_PADDLE_SPEED, STD_ACCELERATION_SPD, WHITE, 1, game_manager, BLUE)
 enemy_paddle = Paddle(SCREEN_WIDTH-PADDLE_OFFSET_X-STD_PADDLE_WIDTH, SCREEN_HEIGHT/2, STD_PADDLE_WIDTH, STD_PADDLE_HEIGHT, STD_MAX_PADDLE_SPEED, STD_ACCELERATION_SPD, WHITE, 2, game_manager, RED)
 ball = Ball(SCREEN_WIDTH/2-STD_BALL_WIDTH/2, SCREEN_HEIGHT/2, STD_BALL_WIDTH, STD_BALL_HEIGHT, STD_MAX_BALL_SPD, STD_ACCELERATION_SPD, WHITE, STD_BALL_RADIUS, [random.choice([-1, 1]), random.randrange(-100, 100)/100], game_manager, BALL_SPD_INCREMENT)
+
 
 game_manager.objects.append(player_paddle)
 game_manager.objects.append(enemy_paddle)
@@ -55,10 +58,12 @@ while run:
     for obj in objects:
         obj.draw(screen)
 
+    text_surface = font.render(str(game_manager.score[1]) + ' : ' + str(game_manager.score[0]), True, (255, 255, 255))
+    screen.blit(text_surface, (200, 250))
+
     # MUSIC
     music_manager.fade_update()
 
-    # END OF FRAME
     pygame.display.flip()
     clock.tick(FPS)
     pygame.display.set_caption("FPS: " + str(int(clock.get_fps())))
