@@ -4,7 +4,7 @@ from components.physicsobject import *
 import random
 from components.particleobject import *
 
-from pong.constants import *
+from constants import *
 
 
 class Ball(PhysicsObject):

@@ -27,7 +27,7 @@ def use_input(keys, objects):
     for obj in objects:
         if hasattr(obj, 'input_group'):
             if obj.input_group == 1:
-                handle_movement(keys, obj, pygame.K_w, pygame.K_s, False, pygame.K_a, pygame.K_d)
+                handle_movement(keys, obj, pygame.K_w, pygame.K_s, True, pygame.K_a, pygame.K_d)
             elif obj.input_group == 2:
                 handle_movement(keys, obj, pygame.K_UP, pygame.K_DOWN, False, pygame.K_LEFT, pygame.K_RIGHT)
     
