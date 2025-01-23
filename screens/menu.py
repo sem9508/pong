@@ -2,13 +2,16 @@ import pygame
 from constants import *
 from objects.button import *
 
+
+# 303030
 class Menu:
     def __init__(self, screen):
         self.screen = screen
         self.run = True
         self.clock = pygame.time.Clock()
         pygame.display.set_caption('Menu')
-        self.start_btn = Button(self.screen.get_width()/2-300/2, 50, 300, 100, 'assets/images/start.png') # deze is 300 bij 100
+        self.singleplayer_btn = Button(self.screen.get_width()/2-300/2, 50, 300, 100, 'assets/images/Singleplayer.png') # deze is 300 bij 100
+        self.multiplayer_btn = Button(self.screen.get_width()/2-300/2, 165, 300, 100, 'assets/images/Multiplayer.png') # deze is 300 bij 100
         self.next_screen = None
 
     def loop(self):
@@ -18,12 +21,17 @@ class Menu:
                     pygame.quit()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.start_btn.update(pygame.mouse.get_pos()):
+                    if self.singleplayer_btn.update(pygame.mouse.get_pos()):
                         self.run = False
                         self.next_screen = 1 # normal game
 
+                    elif self.multiplayer_btn.update(pygame.mouse.get_pos()):
+                        self.run = False
+                        self.next_screen = 2
+
             self.screen.fill(BLACK)
-            self.start_btn.draw(self.screen)
+            self.singleplayer_btn.draw(self.screen)
+            self.multiplayer_btn.draw(self.screen)
             pygame.display.update()
             self.clock.tick(FPS)
 
