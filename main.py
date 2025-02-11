@@ -16,5 +16,4 @@ while run:
     if active_screen == 1: # GAME
         window_instance = Game(screen)
         active_screen = window_instance.loop()
-
     

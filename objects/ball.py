@@ -24,8 +24,6 @@ class Ball(PhysicsObject):
         self.particle.draw(screen)
         pygame.draw.circle(screen, self.color, self.center, self.radius)
 
-
-
     def update(self):
         self.update_pos()
         for obj in self.game_manager.collision_objects:
