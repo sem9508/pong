@@ -12,7 +12,7 @@ from managers.music_manager import *
 
 
 class Game:
-    def __init__(self, screen):
+    def __init__(self, screen, mode):
         self.font = pygame.font.SysFont('Stencil', 74)
 
         self.game_manager = GameManager(SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -23,8 +23,16 @@ class Game:
         self.clock = pygame.time.Clock()
         self.run = True
 
+        self.mode = mode
+
+        if self.mode == 'pvp':
+            self.enemy_paddle = Paddle(SCREEN_WIDTH - PADDLE_OFFSET_X - STD_PADDLE_WIDTH, SCREEN_HEIGHT / 2,STD_PADDLE_WIDTH, STD_PADDLE_HEIGHT, STD_MAX_PADDLE_SPEED,STD_ACCELERATION_SPD, WHITE, 2, self.game_manager, RED)
+
+        elif  self.mode == 'pve':
+
+            self.enemy_paddle = Paddle_ai(SCREEN_WIDTH - PADDLE_OFFSET_X - STD_PADDLE_WIDTH, SCREEN_HEIGHT / 2,STD_PADDLE_WIDTH, STD_PADDLE_HEIGHT, STD_MAX_PADDLE_SPEED,STD_ACCELERATION_SPD, WHITE, None, self.game_manager, RED)
+
         self.player_paddle = Paddle(PADDLE_OFFSET_X, SCREEN_HEIGHT/2, STD_PADDLE_WIDTH, STD_PADDLE_HEIGHT, STD_MAX_PADDLE_SPEED, STD_ACCELERATION_SPD, WHITE, 1, self.game_manager, BLUE)
-        self.enemy_paddle = Paddle_ai(SCREEN_WIDTH-PADDLE_OFFSET_X-STD_PADDLE_WIDTH, SCREEN_HEIGHT/2, STD_PADDLE_WIDTH, STD_PADDLE_HEIGHT, STD_MAX_PADDLE_SPEED, STD_ACCELERATION_SPD, WHITE, None, self.game_manager, RED)
         self.ball = Ball(SCREEN_WIDTH/2-STD_BALL_WIDTH/2, SCREEN_HEIGHT/2, STD_BALL_WIDTH, STD_BALL_HEIGHT, STD_MAX_BALL_SPD, STD_ACCELERATION_SPD, WHITE, STD_BALL_RADIUS, [random.choice([-1, 1]), random.randrange(-100, 100)/100], self.game_manager, BALL_SPD_INCREMENT)
 
 
